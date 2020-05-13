@@ -1,7 +1,7 @@
 const Clarifai = require('clarifai');//從前端改到這邊比較安全
 
 const app = new Clarifai.App({//就都從網站複製貼上的
- apiKey: 
+ apiKey: ''
 });
 
 const handleApiCall = (req, res) => {

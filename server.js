@@ -9,14 +9,13 @@ const signin = require('./controllers/signin');
 const profile = require('./controllers/profile');
 const image = require('./controllers/image');
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 
 const db =knex({
   client: 'pg',//就改postgresql
   connection: {
-    host : '127.0.0.1',
-    user : 'postgres',//要輸入postgres 之前建立的postgres使用者名稱
-    password : '1234',//資料庫密碼也要打 不然連不到
-    database : 'facedetection'//資料庫建在哪就哪
+    connectionString : process.env.DATABASE_URL,
+    ssl: true
   }
 });
 
