@@ -27,7 +27,7 @@ const app = express();
 app.use(bodyParser.json());//有用req.body json就要設定這個 不然就會錯誤
 app.use(cors());//用了就不會出錯了會讀到後端的database, localhost要改一下 不然兩個都3000也會錯
 
-app.get('/', (req, res) => { res.send(database.users) })//在postman的get貼上localhost3000/按send會回應上面的users; 因為會重跑, 所以要加Ann的話, 要去postman /register重跑一次, 再跑/ database才會多1個Ann
+app.get('/', (req, res) => { res.send(' it is working !') })//在postman的get貼上localhost3000/按send會回應上面的users; 因為會重跑, 所以要加Ann的話, 要去postman /register重跑一次, 再跑/ database才會多1個Ann
 app.post('/signin', signin.handleSignin(db ,bcrypt))//就跟register一樣, req跟res其實系統會自動回傳, 去controller裡的signin.js改成功能中的功能
 app.post('/register', (req, res) => { register.handleRegister(req, res, db , bcrypt) })//整段拿去controllers裡的register.js, 另設功能, 因為db跟bcrypt(dependency injection)在register.js會有錯 所以這邊也要設定回傳才不會有錯
 app.get('/profile/:id',(req, res) => { profile.handleProfileGet(req, res, db)})//
@@ -45,8 +45,8 @@ app.post('/imageurl', (req, res) => { image.handleApiCall(req, res)})
 //     console.log('first guess', res)//這會false
 // });
 
-app.listen(3001, () => {
-	console.log('app is running on port 3001');//就看一下有沒有開始監控啦
+app.listen(process.env.PORT || 3001, () => {
+	console.log(`app is running on port ${ process.env.PORT }`);//就看一下有沒有開始監控啦
 })
 
 /*
